@@ -2,12 +2,17 @@ package br.com.joaohlira.office_digital.advogado.domain;
 
 import br.com.joaohlira.office_digital.advogado.application.api.AdvogadoNovoRequest;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Getter
 @Entity
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Table(name = "advogado")
 public class Advogado {
 
