@@ -12,7 +12,7 @@ import java.util.Optional;
 public class APIException extends RuntimeException {
 	private HttpStatus statusException;
 	private ErrorApiResponse bodyException;
-	
+
 	private APIException(HttpStatus statusException, String message, Exception e) {
 		super(message, e);
 		this.statusException = statusException;
@@ -21,14 +21,27 @@ public class APIException extends RuntimeException {
 				.description(getDescription(e))
 				.build();
 	}
-	
+
+	private APIException(String message, Exception e) {
+		super(message, e);
+		this.bodyException = ErrorApiResponse.builder()
+				.message(message)
+				.description(getDescription(e))
+				.build();
+	}
+
 	public static APIException build(HttpStatus statusException, String message) {
 		return new APIException(statusException, message, null);
 	}
-	
+
 	public static APIException build(HttpStatus statusException, String message, Exception e) {
 		log.error("Exception: ", e);
 		return new APIException(statusException, message, e);
+	}
+
+	public static APIException build(String message, Exception e) {
+		log.error("{}: {}", message, e.getMessage());
+		return new APIException(message, e);
 	}
 
 	private String getDescription(Exception e) {
@@ -39,14 +52,14 @@ public class APIException extends RuntimeException {
 	private static String getMessageCause(Exception e) {
 		return e.getCause() != null ? e.getCause().getMessage() : e.getMessage();
 	}
-	
-	
+
+
 
 	public ResponseEntity<ErrorApiResponse> buildErrorResponseEntity() {
 		return ResponseEntity
 				.status(statusException)
 				.body(bodyException);
 	}
-	
+
 	private static final long serialVersionUID = 1L;
 }
