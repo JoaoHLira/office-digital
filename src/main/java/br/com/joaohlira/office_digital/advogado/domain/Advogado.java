@@ -1,5 +1,6 @@
 package br.com.joaohlira.office_digital.advogado.domain;
 
+import br.com.joaohlira.office_digital.advogado.application.api.AdvogadoAlteracaoRequest;
 import br.com.joaohlira.office_digital.advogado.application.api.AdvogadoNovoRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -31,5 +32,13 @@ public class Advogado {
         this.estadoOab = request.estadoOab();
         this.whatsapp = request.whatsapp();
         this.email = request.email();
+    }
+
+    public void editaDadosAdvogado(AdvogadoAlteracaoRequest alteracaoRequest) {
+        this.nome = alteracaoRequest.nome();
+        this.numeroOab = alteracaoRequest.numeroOab();
+        this.estadoOab = alteracaoRequest.estadoOab();
+        this.whatsapp = alteracaoRequest.whatsapp();
+        this.email = alteracaoRequest.email();
     }
 }
