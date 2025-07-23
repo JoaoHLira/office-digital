@@ -26,10 +26,10 @@ public class Advogado {
     private String email;
 
     public Advogado(AdvogadoNovoRequest request) {
-        this.nome = request.getNome();
-        this.numeroOab = request.getNumeroOab();
-        this.estadoOab = request.getEstadoOab();
-        this.whatsapp = request.getWhatsapp();
-        this.email = request.getEmail();
+        this.nome = request.nome();
+        this.numeroOab = request.numeroOab();
+        this.estadoOab = request.estadoOab();
+        this.whatsapp = request.whatsapp();
+        this.email = request.email();
     }
 }
