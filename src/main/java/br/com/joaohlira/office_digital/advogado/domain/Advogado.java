@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@Table(name = "advogado")
+@Table(name = "advogado", schema = "office-digital")
 public class Advogado {
 
     @Id
