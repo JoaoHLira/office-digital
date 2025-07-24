@@ -21,5 +21,5 @@ public interface AdvogadoApi {
 
     @PatchMapping("/altera-dados")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    void alteraDatosDoAdvogado(AdvogadoAlteracaoRequest advogadoAlteracaoRequest);
+    void alteraDatosDoAdvogado(@RequestBody AdvogadoAlteracaoRequest advogadoAlteracaoRequest);
 }
