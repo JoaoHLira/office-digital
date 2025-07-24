@@ -1,5 +1,6 @@
 package br.com.joaohlira.office_digital.advogado.application.service;
 
+import br.com.joaohlira.office_digital.advogado.application.api.AdvogadoAlteracaoRequest;
 import br.com.joaohlira.office_digital.advogado.application.api.AdvogadoNovoRequest;
 import br.com.joaohlira.office_digital.advogado.application.api.AdvogadoResponse;
 import br.com.joaohlira.office_digital.advogado.application.repository.AdvogadoRepository;
@@ -63,5 +64,18 @@ class AdvogadoApplicationServiceTest {
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatusException());
         assertEquals("Advogado não encontrado!", exception.getMessage());
         verify(advogadoRepository, times(1)).buscaAdvogadoPorId(any());
+    }
+
+    @Test
+    void deveAlterarDadosDoAdvogado() {
+        Advogado advogado = AdvogadoDataHelper.createAdvogado();
+        AdvogadoAlteracaoRequest request = AdvogadoDataHelper.createAlteracaoRequest();
+        when(advogadoRepository.buscaAdvogadoPorId(request.id())).thenReturn(advogado);
+        when(advogadoRepository.salva(advogado)).thenReturn(advogado);
+
+        advogadoApplicationService.alteraDadosDoAdvogado(request);
+
+        verify(advogadoRepository, times(1)).buscaAdvogadoPorId(request.id());
+        verify(advogadoRepository, times(1)).salva(advogado);
     }
 }
