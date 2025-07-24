@@ -5,10 +5,10 @@ import br.com.joaohlira.office_digital.advogado.domain.Advogado;
 import br.com.joaohlira.office_digital.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Log4j2
@@ -21,9 +21,13 @@ public class AdvogadoInfraRepository implements AdvogadoRepository {
     @Override
     public Advogado salva(Advogado advogado) {
         log.info("[start] AdvogadoInfraRepository - salva");
-        Advogado advogadoCriado = advogadoSpringDataJPARepository.save(advogado);
+        try {
+            advogadoSpringDataJPARepository.save(advogado);
+        } catch (DataIntegrityViolationException ex) {
+            throw APIException.build(HttpStatus.CONFLICT, "Error: Email já cadastrado");
+        }
         log.debug("[finish] AdvogadoInfraRepository - salva");
-        return advogadoCriado;
+        return advogado;
     }
 
     @Override
