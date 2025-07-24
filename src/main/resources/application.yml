@@ -35,3 +35,7 @@ management:
 springdoc:
   swagger-ui:
     path: /swagger-ui
+
+logging:
+  level:
+    br.com.joaohlira: ${LOG_LEVEL:DEBUG}
