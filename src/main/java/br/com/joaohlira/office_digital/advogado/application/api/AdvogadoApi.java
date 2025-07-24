@@ -18,4 +18,8 @@ public interface AdvogadoApi {
     @GetMapping("/busca-adv/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     AdvogadoResponse buscaAdvogadoPorId(@PathVariable UUID id);
+
+    @PatchMapping("/altera-dados")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    void alteraDatosDoAdvogado(@RequestBody AdvogadoAlteracaoRequest advogadoAlteracaoRequest);
 }

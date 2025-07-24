@@ -1,0 +1,1 @@
+ALTER TABLE advogado ADD CONSTRAINT email_unique UNIQUE (email);

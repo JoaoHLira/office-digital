@@ -30,4 +30,11 @@ public class AdvogadoController implements AdvogadoApi {
         log.debug("[finish] AdvogadoController - buscaAdvogadoPorId");
         return response;
     }
+
+    @Override
+    public void alteraDatosDoAdvogado(AdvogadoAlteracaoRequest advogadoAlteracaoRequest) {
+        log.info("[start] AdvogadoController - alteraDatosDoAdvogado");
+        advogadoService.alteraDadosDoAdvogado(advogadoAlteracaoRequest);
+        log.debug("[finish] AdvogadoController - alteraDatosDoAdvogado");
+    }
 }

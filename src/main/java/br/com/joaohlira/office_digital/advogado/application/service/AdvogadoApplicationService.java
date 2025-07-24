@@ -1,5 +1,6 @@
 package br.com.joaohlira.office_digital.advogado.application.service;
 
+import br.com.joaohlira.office_digital.advogado.application.api.AdvogadoAlteracaoRequest;
 import br.com.joaohlira.office_digital.advogado.application.api.AdvogadoNovoRequest;
 import br.com.joaohlira.office_digital.advogado.application.api.AdvogadoResponse;
 import br.com.joaohlira.office_digital.advogado.application.repository.AdvogadoRepository;
@@ -31,5 +32,14 @@ public class AdvogadoApplicationService implements AdvogadoService {
         Advogado advogado = advogadoRepository.buscaAdvogadoPorId(id);
         log.debug("[finish] AdvogadoApplicationService - buscaAdvogadoPorId");
         return new AdvogadoResponse(advogado);
+    }
+
+    @Override
+    public void alteraDadosDoAdvogado(AdvogadoAlteracaoRequest advogadoAlteracaoRequest) {
+        log.info("[start] AdvogadoApplicationService - alteraDadosDoAdvogado");
+        Advogado advogado = advogadoRepository.buscaAdvogadoPorId(advogadoAlteracaoRequest.id());
+        advogado.editaDadosAdvogado(advogadoAlteracaoRequest);
+        advogadoRepository.salva(advogado);
+        log.debug("[finish] AdvogadoApplicationService - alteraDadosDoAdvogado");
     }
 }

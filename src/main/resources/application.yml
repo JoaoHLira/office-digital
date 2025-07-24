@@ -15,6 +15,13 @@ spring:
       maximumPoolSize: 50
       connectionTimeout: 30000
       idleTimeout: 30000
+  jpa:
+    properties:
+      hibernate:
+        default_schema: office-digital
+  flyway:
+    schemas: office-digital
+    default-schema: office-digital
 
 management:
   endpoints:
@@ -28,3 +35,7 @@ management:
 springdoc:
   swagger-ui:
     path: /swagger-ui
+
+logging:
+  level:
+    br.com.joaohlira: ${LOG_LEVEL:DEBUG}
