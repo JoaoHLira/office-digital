@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -30,13 +32,22 @@ class AdvogadoInfraRepositoryTest {
 
     @Test
     @DisplayName("Deve salvar um novo advogado e retornar com ID gerado")
-    void salva_ComDadosValidos_DeveRetornarAdvogadoComId() {
-        Advogado novo = AdvogadoDataHelper.createAdvogado();
+    void deveSalvarAdvogadoEGerarId() {
+        Advogado novoAdvogado = AdvogadoDataHelper.createAdvogado();
 
-        Advogado salvo = infraRepository.salva(novo);
+        Advogado advogadoNovoCriado = infraRepository.salva(novoAdvogado);
 
-        assertNotNull(salvo);
-        assertNotNull(salvo.getId(), "ID deve ser gerado pelo banco");
-        assertEquals(novo.getNome(), salvo.getNome());
+        assertNotNull(advogadoNovoCriado);
+        assertNotNull(advogadoNovoCriado.getId(), "ID deve ser gerado pelo banco");
+        assertEquals(novoAdvogado.getNome(), advogadoNovoCriado.getNome());
+    }
+
+    @Test
+    @DisplayName("Deve buscar Advogado pelo ID")
+    void deveBuscarAdvogadoPeloId() {
+        Advogado advogado = infraRepository.buscaAdvogadoPorId(UUID.fromString("123e4567-e89b-12d3-a456-426614174000"));
+
+        assertEquals(UUID.fromString("123e4567-e89b-12d3-a456-426614174000"), advogado.getId());
+        assertEquals("Daniel Farias", advogado.getNome());
     }
 }
