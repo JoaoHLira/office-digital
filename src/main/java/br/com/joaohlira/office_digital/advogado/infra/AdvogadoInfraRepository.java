@@ -22,12 +22,11 @@ public class AdvogadoInfraRepository implements AdvogadoRepository {
     public Advogado salva(Advogado advogado) {
         log.info("[start] AdvogadoInfraRepository - salva");
         try {
-            advogadoSpringDataJPARepository.save(advogado);
+            log.debug("[finish] AdvogadoInfraRepository - salva");
+            return advogadoSpringDataJPARepository.save(advogado);
         } catch (DataIntegrityViolationException ex) {
             throw APIException.build(HttpStatus.CONFLICT, "Error: Email já cadastrado");
         }
-        log.debug("[finish] AdvogadoInfraRepository - salva");
-        return advogado;
     }
 
     @Override
