@@ -1,5 +1,6 @@
 package br.com.joaohlira.office_digital.usuario.domain;
 
+import br.com.joaohlira.office_digital.usuario.application.api.UsuarioRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -23,4 +24,11 @@ public class Usuario {
     private String whatsapp;
     private String email;
     private LocalDateTime dataHoraCadastro;
+
+    public Usuario(UsuarioRequest usuarioRequest) {
+        this.nome = usuarioRequest.nome();
+        this.whatsapp = usuarioRequest.whastapp();
+        this.email = usuarioRequest.email();
+        this.dataHoraCadastro = LocalDateTime.now();
+    }
 }
