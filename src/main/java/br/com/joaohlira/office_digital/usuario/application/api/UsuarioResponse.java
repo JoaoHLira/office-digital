@@ -1,5 +1,6 @@
 package br.com.joaohlira.office_digital.usuario.application.api;
 
+import br.com.joaohlira.office_digital.usuario.domain.Usuario;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -14,4 +15,11 @@ public class UsuarioResponse {
     private String email;
     private LocalDateTime dataHoraCadastro;
 
+    public UsuarioResponse(Usuario usuario) {
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.whatsapp = usuario.getWhatsapp();
+        this.email = usuario.getEmail();
+        this.dataHoraCadastro = usuario.getDataHoraCadastro();
+    }
 }

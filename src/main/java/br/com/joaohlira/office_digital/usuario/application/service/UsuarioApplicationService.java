@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Log4j2
 @Service
 @RequiredArgsConstructor
@@ -20,6 +22,14 @@ public class UsuarioApplicationService implements UsuarioService {
         log.info("[start] UsuarioApplicationService - criaNovoUsuario");
         Usuario usuario = usuarioRepository.salva(new Usuario(usuarioRequest));
         log.debug("[finish] UsuarioApplicationService - criaNovoUsuario");
-        return null;
+        return new UsuarioResponse(usuario);
+    }
+
+    @Override
+    public UsuarioResponse buscaUsuario(UUID id) {
+        log.info("[start] UsuarioApplicationService - buscaUsuario");
+        Usuario usuario = usuarioRepository.buscaUsuarioPorId(id);
+        log.debug("[finish] UsuarioApplicationService - buscaUsuario");
+        return new UsuarioResponse(usuario);
     }
 }

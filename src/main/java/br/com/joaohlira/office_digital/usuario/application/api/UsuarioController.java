@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @Log4j2
 @RestController
 @RequiredArgsConstructor
@@ -18,5 +20,13 @@ public class UsuarioController implements UsuarioApi {
         UsuarioResponse usuarioCadastrado = usuarioService.criaNovoUsuario(usuarioRequest);
         log.debug("[finish] UsuarioController - cadastraUsuario");
         return usuarioCadastrado;
+    }
+
+    @Override
+    public UsuarioResponse buscaUsuario(UUID id) {
+        log.info("[start] UsuarioController - buscaUsuario");
+        UsuarioResponse usuario = usuarioService.buscaUsuario(id);
+        log.debug("[finish] UsuarioController - buscaUsuario");
+        return usuario;
     }
 }
