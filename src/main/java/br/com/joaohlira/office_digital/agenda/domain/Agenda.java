@@ -1,6 +1,7 @@
 package br.com.joaohlira.office_digital.agenda.domain;
 
 import br.com.joaohlira.office_digital.advogado.domain.Advogado;
+import br.com.joaohlira.office_digital.agenda.application.api.AgendaRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
