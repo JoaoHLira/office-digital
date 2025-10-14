@@ -2,10 +2,11 @@ package br.com.joaohlira.office_digital.agenda.application.repository;
 
 import br.com.joaohlira.office_digital.agenda.domain.Agenda;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AgendaRepository {
     Agenda salva(Agenda agenda);
 
-    List<Agenda> buscaTodosOsCompromissos();
+    List<Agenda> buscaTodosOsCompromissos(LocalDate data);
 }

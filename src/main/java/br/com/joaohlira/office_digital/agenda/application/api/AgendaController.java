@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Log4j2
@@ -23,9 +24,9 @@ public class AgendaController implements AgendaAPI {
     }
 
     @Override
-    public List<AgendaListResponse> buscaCompromissosPorData() {
+    public List<AgendaListResponse> buscaCompromissosPorData(LocalDate data) {
         log.info("[start] AgendaController - buscaCompromissosPorData");
-        List<AgendaListResponse> compromissos = agendaService.buscaCompromissos();
+        List<AgendaListResponse> compromissos = agendaService.buscaCompromissos(data);
         log.debug("[finish] AgendaController - buscaCompromissosPorData");
         return compromissos;
     }

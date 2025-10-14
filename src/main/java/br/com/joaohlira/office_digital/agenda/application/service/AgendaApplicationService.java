@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Log4j2
@@ -32,9 +33,10 @@ public class AgendaApplicationService implements AgendaService {
     }
 
     @Override
-    public List<AgendaListResponse> buscaCompromissos() {
+    public List<AgendaListResponse> buscaCompromissos(LocalDate data) {
         log.info("[start] AgendaApplicationService - buscaCompromissos");
-        List<Agenda> compromissos = agendaRepository.buscaTodosOsCompromissos();
+        LocalDate dataBusca = (data != null) ? data : LocalDate.now();
+        List<Agenda> compromissos = agendaRepository.buscaTodosOsCompromissos(dataBusca);
         log.debug("[finish] AgendaApplicationService - buscaCompromissos");
         return AgendaListResponse.converte(compromissos);
     }
