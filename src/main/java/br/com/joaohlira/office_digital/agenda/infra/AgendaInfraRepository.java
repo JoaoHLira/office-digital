@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Log4j2
 @Repository
 @RequiredArgsConstructor
@@ -19,5 +21,13 @@ public class AgendaInfraRepository implements AgendaRepository {
         agendaSpringDataJPARepository.save(agenda);
         log.debug("[finish] AgendaInfraRepository - salva");
         return agenda;
+    }
+
+    @Override
+    public List<Agenda> buscaTodosOsCompromissos() {
+        log.info("[start] AgendaInfraRepository - buscaTodosOsCompromissos");
+        List<Agenda> compromissos = agendaSpringDataJPARepository.findAll();
+        log.debug("[finish] AgendaInfraRepository - buscaTodosOsCompromissos");
+        return compromissos;
     }
 }
