@@ -1,0 +1,1 @@
+ALTER TABLE agenda ADD COLUMN status_compromisso VARCHAR(50);
