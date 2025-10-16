@@ -1,13 +1,13 @@
-package br.com.joaohlira.office_digital.agenda.application.api;
+package br.com.joaohlira.office_digital.compromisso.application.api;
 
-import br.com.joaohlira.office_digital.agenda.domain.TipoCompromisso;
+import br.com.joaohlira.office_digital.compromisso.domain.TipoCompromisso;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 
-public record AgendaRequest(LocalDate data,
+public record CompromissoRequest(LocalDate data,
                             LocalTime horario,
                             TipoCompromisso tipoCompromisso,
                             String descricaoCompromisso,

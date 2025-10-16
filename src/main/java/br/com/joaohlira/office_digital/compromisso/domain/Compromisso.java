@@ -1,7 +1,7 @@
-package br.com.joaohlira.office_digital.agenda.domain;
+package br.com.joaohlira.office_digital.compromisso.domain;
 
 import br.com.joaohlira.office_digital.advogado.domain.Advogado;
-import br.com.joaohlira.office_digital.agenda.application.api.AgendaRequest;
+import br.com.joaohlira.office_digital.compromisso.application.api.CompromissoRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -17,8 +17,8 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@Table(name = "agenda", schema = "office-digital")
-public class Agenda {
+@Table(name = "compromisso", schema = "office-digital")
+public class Compromisso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,6 +27,8 @@ public class Agenda {
     private LocalTime horario;
     @Enumerated(EnumType.STRING)
     private TipoCompromisso tipoCompromisso;
+    @Enumerated(EnumType.STRING)
+    private StatusCompromisso statusCompromisso;
     private String descricaoCompromisso;
     private String numeroProcesso;
     private LocalDateTime dataHoraCriacao;
@@ -34,10 +36,11 @@ public class Agenda {
     @JoinColumn(name = "advogado_responsavel_id")
     private Advogado advogadoResponsavel;
 
-    public Agenda(AgendaRequest agendaRequest, Advogado advogado) {
+    public Compromisso(CompromissoRequest agendaRequest, Advogado advogado) {
         this.data = agendaRequest.data();
         this.horario = agendaRequest.horario();
         this.tipoCompromisso = agendaRequest.tipoCompromisso();
+        this.statusCompromisso = StatusCompromisso.AGENDADO;
         this.numeroProcesso = agendaRequest.numeroProcesso();
         this.descricaoCompromisso = agendaRequest.descricaoCompromisso();
         this.dataHoraCriacao = LocalDateTime.now();
