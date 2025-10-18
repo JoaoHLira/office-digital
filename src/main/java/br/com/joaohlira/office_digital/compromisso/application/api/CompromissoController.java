@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @RestController
@@ -29,5 +30,12 @@ public class CompromissoController implements CompromissoAPI {
         List<CompromissoListResponse> compromissos = compromissoService.buscaCompromissos(data);
         log.debug("[finish] CompromissoController - buscaCompromissosPorData");
         return compromissos;
+    }
+
+    @Override
+    public void atualizaCompromisso(UUID idCompromisso, CompromissoAltecacaoRequest alteracaoRequest) {
+        log.info("[start] CompromissoController - atualizaCompromisso");
+        compromissoService.atualizaCompromisso(idCompromisso, alteracaoRequest);
+        log.debug("[finish] CompromissoController - atualizaCompromisso");
     }
 }

@@ -1,6 +1,7 @@
 package br.com.joaohlira.office_digital.compromisso.domain;
 
 import br.com.joaohlira.office_digital.advogado.domain.Advogado;
+import br.com.joaohlira.office_digital.compromisso.application.api.CompromissoAltecacaoRequest;
 import br.com.joaohlira.office_digital.compromisso.application.api.CompromissoRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -36,14 +37,23 @@ public class Compromisso {
     @JoinColumn(name = "advogado_responsavel_id")
     private Advogado advogadoResponsavel;
 
-    public Compromisso(CompromissoRequest agendaRequest, Advogado advogado) {
-        this.data = agendaRequest.data();
-        this.horario = agendaRequest.horario();
-        this.tipoCompromisso = agendaRequest.tipoCompromisso();
+    public Compromisso(CompromissoRequest compromissoRequest, Advogado advogado) {
+        this.data = compromissoRequest.data();
+        this.horario = compromissoRequest.horario();
+        this.tipoCompromisso = compromissoRequest.tipoCompromisso();
         this.statusCompromisso = StatusCompromisso.AGENDADO;
-        this.numeroProcesso = agendaRequest.numeroProcesso();
-        this.descricaoCompromisso = agendaRequest.descricaoCompromisso();
+        this.numeroProcesso = compromissoRequest.numeroProcesso();
+        this.descricaoCompromisso = compromissoRequest.descricaoCompromisso();
         this.dataHoraCriacao = LocalDateTime.now();
         this.advogadoResponsavel = advogado;
+    }
+
+    public void atualiza(CompromissoAltecacaoRequest alteracaoRequest) {
+        this.data = alteracaoRequest.data();
+        this.horario = alteracaoRequest.horario();
+        this.tipoCompromisso = alteracaoRequest.tipoCompromisso();
+        this.numeroProcesso = alteracaoRequest.numeroProcesso();
+        this.descricaoCompromisso = alteracaoRequest.descricaoCompromisso();
+        this.dataHoraCriacao = LocalDateTime.now();
     }
 }
