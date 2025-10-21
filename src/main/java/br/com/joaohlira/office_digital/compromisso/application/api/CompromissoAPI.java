@@ -21,4 +21,9 @@ public interface CompromissoAPI {
     @PatchMapping("/atualiza/{idCompromisso}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void atualizaCompromisso(@PathVariable UUID idCompromisso, @RequestBody CompromissoAltecacaoRequest alteracaoRequest);
+
+    @PatchMapping("/cancela/{idCompromisso}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void cancelaCompromisso(@PathVariable UUID idCompromisso);
+
 }

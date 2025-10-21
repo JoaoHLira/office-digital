@@ -38,4 +38,11 @@ public class CompromissoController implements CompromissoAPI {
         compromissoService.atualizaCompromisso(idCompromisso, alteracaoRequest);
         log.debug("[finish] CompromissoController - atualizaCompromisso");
     }
+
+    @Override
+    public void cancelaCompromisso(UUID idCompromisso) {
+        log.info("[start] CompromissoController - cancelaCompromisso");
+        compromissoService.cancelaCompromissoAgendado(idCompromisso);
+        log.debug("[finish] CompromissoController - cancelaCompromisso");
+    }
 }

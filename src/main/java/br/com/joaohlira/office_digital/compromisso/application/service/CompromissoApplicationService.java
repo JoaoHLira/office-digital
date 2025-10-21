@@ -50,4 +50,13 @@ public class CompromissoApplicationService implements CompromissoService {
         compromissoRepository.salva(compromisso);
         log.debug("[finish] CompromissoApplicationService - atualizaCompromisso");
     }
+
+    @Override
+    public void cancelaCompromissoAgendado(UUID idCompromisso) {
+        log.info("[start] CompromissoApplicationService - cancelaCompromissoAgendado");
+        Compromisso compromisso = compromissoRepository.buscaCompromissoPorId(idCompromisso);
+        compromisso.cancela();
+        compromissoRepository.salva(compromisso);
+        log.debug("[finish] CompromissoApplicationService - cancelaCompromissoAgendado");
+    }
 }

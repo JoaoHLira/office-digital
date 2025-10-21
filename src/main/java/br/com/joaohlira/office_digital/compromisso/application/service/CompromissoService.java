@@ -15,4 +15,6 @@ public interface CompromissoService {
     List<CompromissoListResponse> buscaCompromissos(LocalDate data);
 
     void atualizaCompromisso(UUID idCompromisso, CompromissoAltecacaoRequest alteracaoRequest);
+
+    void cancelaCompromissoAgendado(UUID idCompromisso);
 }

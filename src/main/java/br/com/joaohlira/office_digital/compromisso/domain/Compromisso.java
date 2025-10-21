@@ -3,11 +3,13 @@ package br.com.joaohlira.office_digital.compromisso.domain;
 import br.com.joaohlira.office_digital.advogado.domain.Advogado;
 import br.com.joaohlira.office_digital.compromisso.application.api.CompromissoAltecacaoRequest;
 import br.com.joaohlira.office_digital.compromisso.application.api.CompromissoRequest;
+import br.com.joaohlira.office_digital.handler.APIException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -55,5 +57,23 @@ public class Compromisso {
         this.numeroProcesso = alteracaoRequest.numeroProcesso();
         this.descricaoCompromisso = alteracaoRequest.descricaoCompromisso();
         this.dataHoraCriacao = LocalDateTime.now();
+    }
+
+    public void cancela() {
+        verificaStatusEhIgualAtual(StatusCompromisso.CANCELADO);
+        verificaSeJaFoiRealizado();
+        this.statusCompromisso = StatusCompromisso.CANCELADO;
+    }
+
+    private void verificaStatusEhIgualAtual(StatusCompromisso status) {
+        if (this.statusCompromisso.equals(status)) {
+            throw APIException.build(HttpStatus.CONFLICT, "O compromisso já está com status: " + status);
+        }
+    }
+
+    private void verificaSeJaFoiRealizado() {
+        if (this.statusCompromisso.equals(StatusCompromisso.REALIZADO)) {
+            throw APIException.build(HttpStatus.CONFLICT, "O compromisso já foi realizado!");
+        }
     }
 }
